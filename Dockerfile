@@ -24,17 +24,16 @@ COPY requirements.txt .
 
 # Install dependencies in multiple steps to handle problematic packages
 RUN pip install --no-cache-dir \
-    flask==3.0.0 \
-    flask-socketio==5.3.6 \
-    python-dotenv==1.0.0 \
-    eventlet==0.33.3 \
-    gunicorn==21.2.0
+    flask \
+    flask-socketio \
+    python-dotenv \
+    eventlet \
+    gunicorn
 
-# Install boto3 and related packages separately
+# Install AWS packages without version constraints
 RUN pip install --no-cache-dir \
-    botocore==1.34.7 \
-    boto3==1.34.7 \
-    amazon-transcribe==0.5.0
+    boto3 \
+    amazon-transcribe
 
 # Copy application code
 COPY . .
