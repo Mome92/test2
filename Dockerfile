@@ -15,6 +15,12 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+# Upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# Install awscrt separately first
+RUN pip install --no-cache-dir awscrt==0.19.19
+
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
