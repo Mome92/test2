@@ -16,6 +16,9 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+# Set default port
+ENV PORT=8000
+
 # Upgrade pip and install wheel
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
@@ -39,4 +42,4 @@ RUN pip install --no-cache-dir \
 COPY . .
 
 # Command to run the application
-CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "--bind", "0.0.0.0:$PORT", "app:app"] 
+CMD gunicorn --worker-class eventlet -w 1 --bind "0.0.0.0:${PORT}" app:app 
